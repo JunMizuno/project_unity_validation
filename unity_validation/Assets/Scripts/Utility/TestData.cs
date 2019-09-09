@@ -25,8 +25,10 @@ public class TestData : MonoBehaviour
     delegate void ShowLog(string str);
     delegate int CalculateBase(int a, int b);
 
-    // @memo.
     private Vector3[] vectorArray;
+
+    // @memo. 「= default」の記述例
+	private float defaultTest = default;
 
     // @memo. 非同期テスト
     private CancellationTokenSource tokenSource;
