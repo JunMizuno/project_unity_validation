@@ -3,18 +3,22 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        //_Color ("Color", Color) = (1, 1, 1, 1)
     }
 
     SubShader
     {
         Tags { "RenderType"="Opaque" }
 
+        // @memo. 複数パスなどにおける共通設定を記述する為のもの(ENDCGまでの間に記述したものが対象)
         CGINCLUDE
 
         #include "UnityCG.cginc"
+        // @memo. Instancing系マクロはUnityInstancing.cgincで定義されている
         
         sampler2D _MainTex;
         float4 _MainTex_ST;
+        //float4 _Color;
 
         struct appdata
         {
@@ -53,17 +57,27 @@
              return o;   
         }
 
+        // @memo. スクリプト側から値を取る場合の記述例
+        // @memo. この場合では_Colorという変数を定義していることになる
+        UNITY_INSTANCING_BUFFER_START(Props)
+        UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+        UNITY_INSTANCING_BUFFER_END(Props)
+
         fixed4 frag(v2f i) : SV_Target
         {
              // @memo. GPU Instancing用に追加
              // @memo. これが無いと、各インスタンス毎のモデル行列が区別されない
              UNITY_SETUP_INSTANCE_ID(i);
              fixed4 col = tex2D(_MainTex, i.uv);
+
+             // @memo. 外部変数値を使用する例
+             col *= UNITY_ACCESS_INSTANCED_PROP(Props, _Color);
+
              UNITY_APPLY_FOG(i.fogCoord, col);
-             //return col;
+             return col;
 
              // @memo. 座標系のインスタンスを使用する例のために追加
-             return mul(unity_WorldToObject, i.worldPos);
+             //return mul(unity_WorldToObject, i.worldPos);
         }
 
         ENDCG
