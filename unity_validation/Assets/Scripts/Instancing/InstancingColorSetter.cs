@@ -8,9 +8,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class InstancingColorSetter : MonoBehaviour
 {
-    [SerializeField]
-    Color color;
-
+    Color color = default;
     new Renderer renderer = default;
     // @memo. 変数値を経由させる為のもの
     MaterialPropertyBlock props = default;
