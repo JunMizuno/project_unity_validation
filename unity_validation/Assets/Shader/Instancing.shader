@@ -71,7 +71,7 @@
              fixed4 col = tex2D(_MainTex, i.uv);
 
              // @memo. 外部変数値を使用する例
-             col *= UNITY_ACCESS_INSTANCED_PROP(Props, _Color);
+             //col *= UNITY_ACCESS_INSTANCED_PROP(Props, _Color);
 
              UNITY_APPLY_FOG(i.fogCoord, col);
              return col;

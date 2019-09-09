@@ -25,6 +25,7 @@ public class InstancingColorSetter : MonoBehaviour
 
     private void Update()
     {
+        // @memo. ID取らずとも、直接変数名を指定しても良い模様
         props.SetColor(id, color);
         renderer.SetPropertyBlock(props);
     }
