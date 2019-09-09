@@ -34,6 +34,9 @@
         v2f vert(appdata v)
         {
              v2f o;
+             // @memo. GPU Instancing用に追加
+             // @memo. これが無いと、各インスタンス毎のモデル行列が区別されない
+             UNITY_SETUP_INSTANCE_ID(v);
              o.pos = UnityObjectToClipPos(v.vertex);
              o.uv = TRANSFORM_TEX(v.uv, _MainTex);
              UNITY_TRANSFER_FOG(o, o.vertex);
