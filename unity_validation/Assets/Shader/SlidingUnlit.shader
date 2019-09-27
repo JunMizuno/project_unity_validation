@@ -108,6 +108,12 @@
                 }
                 */
 
+                // @memo. 以下は十時の切り抜きのパターン
+                if ((uv.x < 0.45f || uv.x > 0.55f) && (uv.y < 0.45f || uv.y > 0.55f))
+                {
+                    return fixed4(0, 0, 0, 0);
+                }
+
                 fixed4 col = tex2D(_MainTex, uv);
                 col *= _Color;
                 
