@@ -108,8 +108,17 @@
                 }
                 */
 
-                // @memo. 以下は十時の切り抜きのパターン
+                // @memo. 以下、十時の切り抜きのパターン
+                /*
                 if ((uv.x < 0.45f || uv.x > 0.55f) && (uv.y < 0.45f || uv.y > 0.55f))
+                {
+                    return fixed4(0, 0, 0, 0);
+                }
+                */
+
+                // @memo. 以下、十時でスライドするパターン
+                float targetValue = frac(_Time.y / 2.0f);
+                if ((uv.x < 0.0f + targetValue || uv.x > 0.1f + targetValue) && (uv.y < 0.0f + targetValue || uv.y > 0.1f + targetValue))
                 {
                     return fixed4(0, 0, 0, 0);
                 }
