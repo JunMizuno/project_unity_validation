@@ -117,8 +117,28 @@
                 */
 
                 // @memo. 以下、十時でスライドするパターン
+                /*
                 float targetValue = frac(_Time.y / 2.0f);
                 if ((uv.x < 0.0f + targetValue || uv.x > 0.1f + targetValue) && (uv.y < 0.0f + targetValue || uv.y > 0.1f + targetValue))
+                {
+                    return fixed4(0, 0, 0, 0);
+                }
+                */
+
+                // @memo. 以下、たすき掛けで表示を消すパターン
+                // @memo. 左下から右上にかけて消す、数値を大きくすると消す範囲が広がる
+                // @memo. 符号を逆転させるとたすき部分のみ表示させるように変わる
+                /*
+                if (abs(uv.x - uv.y) < 0.15f)
+                {
+                    return fixed4(0, 0, 0, 0);
+                }
+                */
+                
+                // @memo. 以下、たすき掛けで表示を消すパターン
+                // @memo. 左上から右下にかけて消す、1.0をベースに左の条件条件値と右の条件値を設定する
+                // @memo. 符号を逆転させて&&を||に変えるとたすき部分のみ表示させるように変わる
+                if (abs(uv.x + uv.y) > 0.85f && abs(uv.x + uv.y) < 1.15f)
                 {
                     return fixed4(0, 0, 0, 0);
                 }
