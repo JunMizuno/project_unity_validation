@@ -138,9 +138,19 @@
                 // @memo. 以下、たすき掛けで表示を消すパターン
                 // @memo. 左上から右下にかけて消す、1.0をベースに左の条件条件値と右の条件値を設定する
                 // @memo. 符号を逆転させて&&を||に変えるとたすき部分のみ表示させるように変わる
+                /*
                 if (abs(uv.x + uv.y) > 0.85f && abs(uv.x + uv.y) < 1.15f)
                 {
                     return fixed4(0, 0, 0, 0);
+                }
+                */
+
+                // @memo. 以下、たすき掛けのクロスで表示を点滅させるパターン
+                if ((abs(uv.x - uv.y) < 0.1f) ||
+                    (abs(uv.x + uv.y) > 0.9f && abs(uv.x + uv.y) < 1.1))
+                {
+                    fixed4 col = tex2D(_MainTex, uv);
+                    return fixed4(col.r, col.g, col.b, col.a * abs(_SinTime.w));
                 }
 
                 fixed4 col = tex2D(_MainTex, uv);
