@@ -146,12 +146,14 @@
                 */
 
                 // @memo. 以下、たすき掛けのクロスで表示を点滅させるパターン
-                if ((abs(uv.x - uv.y) < 0.1f) ||
-                    (abs(uv.x + uv.y) > 0.9f && abs(uv.x + uv.y) < 1.1))
+                /*
+                if ((abs(uv.x - uv.y) < 0.2f) ||
+                    (abs(uv.x + uv.y) > 0.8f && abs(uv.x + uv.y) < 1.2))
                 {
                     fixed4 col = tex2D(_MainTex, uv);
                     return fixed4(col.r, col.g, col.b, col.a * abs(_SinTime.w));
                 }
+                */
 
                 fixed4 col = tex2D(_MainTex, uv);
                 col *= _Color;
